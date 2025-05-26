@@ -1,6 +1,5 @@
 from django.db import models
 
-from django.db import models
 
 class Catalog(models.Model):
     name = models.CharField("Название", max_length=255)
@@ -19,6 +18,7 @@ class Catalog(models.Model):
 
     def __str__(self):
         return f"{self.parent.name} / {self.name}" if self.parent else self.name
+
 
 class Product(models.Model):
     catalog = models.ForeignKey(
@@ -51,6 +51,7 @@ class User(models.Model):
     def __str__(self):
         return f"{self.name} ({self.chat_id})"
 
+
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart_items', verbose_name="Пользователь")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
@@ -62,6 +63,7 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.user.name} - {self.product.name} x{self.count}"
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', verbose_name="Пользователь")
@@ -77,6 +79,7 @@ class Order(models.Model):
     def __str__(self):
         return f"Заказ #{self.id} — {self.user.name}"
 
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name="Заказ")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Товар")
@@ -89,6 +92,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.order.id} - {self.product.name} x{self.count}"
+
 
 class Broadcast(models.Model):
     STATUS_CHOICES = [

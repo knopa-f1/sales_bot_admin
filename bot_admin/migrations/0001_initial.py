@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -34,7 +33,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='subcategories', to='bot_admin.catalog')),
+                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                             related_name='subcategories', to='bot_admin.catalog')),
             ],
         ),
         migrations.CreateModel(
@@ -45,7 +45,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True)),
                 ('image', models.ImageField(upload_to='product_images/')),
                 ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('catalog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='bot_admin.catalog')),
+                ('catalog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products',
+                                              to='bot_admin.catalog')),
             ],
         ),
         migrations.CreateModel(
@@ -54,14 +55,16 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('count', models.PositiveIntegerField()),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='bot_admin.order')),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items',
+                                            to='bot_admin.order')),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bot_admin.product')),
             ],
         ),
         migrations.AddField(
             model_name='order',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to='bot_admin.user'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders',
+                                    to='bot_admin.user'),
         ),
         migrations.CreateModel(
             name='Cart',
@@ -69,7 +72,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('count', models.PositiveIntegerField(default=1)),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bot_admin.product')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_items', to='bot_admin.user')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_items',
+                                           to='bot_admin.user')),
             ],
         ),
     ]

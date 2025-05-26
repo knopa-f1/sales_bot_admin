@@ -3,6 +3,7 @@ import logging.config
 
 from app.settings import DEBUG
 
+
 def setup_logging() -> None:
     logging_config = {
         "version": 1,
@@ -16,13 +17,13 @@ def setup_logging() -> None:
             "console": {
                 "class": "logging.StreamHandler",
                 "formatter": "standard",
-                "level": "DEBUG" if DEBUG == True else "INFO",
+                "level": "DEBUG" if DEBUG is True else "INFO",
             },
             "file": {
                 "class": "logging.handlers.TimedRotatingFileHandler",
                 "filename": "logs/app.log",
                 "formatter": "standard",
-                "level": "DEBUG" if DEBUG == True else "INFO",
+                "level": "DEBUG" if DEBUG is True else "INFO",
                 "when": "midnight",
                 "interval": 1,
                 "backupCount": 30

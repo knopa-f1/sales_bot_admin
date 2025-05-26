@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('bot_admin', '0002_rename_payment_id_order_transaction_id_order_status'),
     ]
@@ -43,12 +42,14 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cart',
             name='product',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bot_admin.product', verbose_name='Товар'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bot_admin.product',
+                                    verbose_name='Товар'),
         ),
         migrations.AlterField(
             model_name='cart',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_items', to='bot_admin.user', verbose_name='Пользователь'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_items',
+                                    to='bot_admin.user', verbose_name='Пользователь'),
         ),
         migrations.AlterField(
             model_name='catalog',
@@ -58,7 +59,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='catalog',
             name='parent',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='subcategories', to='bot_admin.catalog', verbose_name='Родитель'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='subcategories', to='bot_admin.catalog', verbose_name='Родитель'),
         ),
         migrations.AlterField(
             model_name='order',
@@ -83,7 +85,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='order',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to='bot_admin.user', verbose_name='Пользователь'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders',
+                                    to='bot_admin.user', verbose_name='Пользователь'),
         ),
         migrations.AlterField(
             model_name='orderitem',
@@ -98,17 +101,20 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='orderitem',
             name='order',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='bot_admin.order', verbose_name='Заказ'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items',
+                                    to='bot_admin.order', verbose_name='Заказ'),
         ),
         migrations.AlterField(
             model_name='orderitem',
             name='product',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bot_admin.product', verbose_name='Товар'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bot_admin.product',
+                                    verbose_name='Товар'),
         ),
         migrations.AlterField(
             model_name='product',
             name='catalog',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='bot_admin.catalog', verbose_name='Категория'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products',
+                                    to='bot_admin.catalog', verbose_name='Категория'),
         ),
         migrations.AlterField(
             model_name='product',
@@ -145,7 +151,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('message', models.TextField(verbose_name='Текст сообщения')),
-                ('status', models.CharField(choices=[('pending', 'Ожидает'), ('sent', 'Отправлено'), ('error', 'Ошибка')], default='pending', max_length=20, verbose_name='Статус')),
+                ('status',
+                 models.CharField(choices=[('pending', 'Ожидает'), ('sent', 'Отправлено'), ('error', 'Ошибка')],
+                                  default='pending', max_length=20, verbose_name='Статус')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Создано')),
                 ('sent_at', models.DateTimeField(blank=True, null=True, verbose_name='Отправлено')),
                 ('recipients', models.ManyToManyField(to='bot_admin.user', verbose_name='Получатели')),
